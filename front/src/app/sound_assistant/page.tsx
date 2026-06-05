@@ -33,11 +33,11 @@ export default function SoundAssistantPage() {
                 method: "POST"
             })
             const data = await response.json()
-            if (data.status === "success") {
-                changeAnswerValue(data.message)
-                console.log(data.message)
+            if (data.answer) {
+                changeAnswerValue(data.answer)
+                console.log(data.answer)
             } else {
-                console.error(data.message)
+                console.error("No answer received")
             }
         } catch (error) {
             console.log(error)
