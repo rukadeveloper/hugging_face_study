@@ -52,7 +52,7 @@ export default function SoundAssistantPage() {
                     <AudioComponent changeAudioToText={changeAudioToText} changeTransforming={changeTransforming} isTransforming={isTransforming} />
                     <CommonPut put={"output"} label={"텍스트 변환"} height={110} highHeight={150} hasButton={"텍스트 변환"} value={audioToTextValue} isTransforming={isTransforming} />
                     <CommonPut put={"input"} label={"question"} height={40} hasButton={"질문하기"} value={questionValue} changeValue={changeQuestionValue} onSubmit={quest} />
-                    <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} />
+                    <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} onSubmit={() => {}} />
                 </div>
                 <div className="mt-[10px]">
                     <AudioResponse />
