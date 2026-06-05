@@ -70,7 +70,7 @@ async def audio_to_text(input_audio_path: str = Form(...)):
 
 
 @router.post("/text_generation")
-async def text_generation(question: str = Form(...)):
+async def text_generation(question: str):
     """Generate text response based on question"""
     global current_answer
 
