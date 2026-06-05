@@ -8,7 +8,7 @@ export default function Home() {
           HuggingFace AI Assistant
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Link
             href="/sentiment-analysis"
             className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow cursor-pointer"
@@ -19,6 +19,32 @@ export default function Home() {
             </h2>
             <p className="text-gray-600">
               Analyze the sentiment of text and CSV files using advanced NLP models.
+            </p>
+          </Link>
+
+          <Link
+            href="/emotion"
+            className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow cursor-pointer"
+          >
+            <div className="text-2xl font-bold text-purple-600 mb-2">😊</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Emotion Analysis
+            </h2>
+            <p className="text-gray-600">
+              Detect emotions like joy, sadness, anger from text.
+            </p>
+          </Link>
+
+          <Link
+            href="/emotion_csv"
+            className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow cursor-pointer"
+          >
+            <div className="text-2xl font-bold text-pink-600 mb-2">😭</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Emotion CSV Analysis
+            </h2>
+            <p className="text-gray-600">
+              Analyze emotions in CSV files.
             </p>
           </Link>
 
