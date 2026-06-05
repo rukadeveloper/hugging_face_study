@@ -46,7 +46,9 @@ ENV/
 node_modules/
 .next/
 out/
-dist/
+front/.next/
+front/out/
+front/dist/
 
 # Build outputs
 *.log
