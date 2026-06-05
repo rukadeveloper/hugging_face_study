@@ -10,6 +10,7 @@ export default function SoundAssistantPage() {
     const [questionValue, setQuestionValue] = useState<string>("");
     const [answerValue, setAnswerValue] = useState<string>("");
     const [isTransforming, setIsTransforming] = useState<boolean>(false);
+    const [ttsAudioUrl, setTtsAudioUrl] = useState<string>("");
 
     const changeAudioToText = (data: string) => {
         setAudioToTextValue(data);
@@ -33,7 +34,10 @@ export default function SoundAssistantPage() {
                 method: "POST"
             })
             const data = await response.json()
-            console.log("TTS response:", data)
+            if (data.url) {
+                setTtsAudioUrl(`http://localhost:8000${data.url}`)
+                console.log("TTS response:", data)
+            }
         } catch (error) {
             console.log("TTS error:", error)
         }
@@ -67,7 +71,7 @@ export default function SoundAssistantPage() {
                     <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} onSubmit={convertToTTS} />
                 </div>
                 <div className="mt-[10px]">
-                    <AudioResponse />
+                    <AudioResponse audioSrc={ttsAudioUrl} />
                 </div>
             </div>
         </main>

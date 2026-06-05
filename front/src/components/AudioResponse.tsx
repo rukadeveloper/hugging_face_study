@@ -1,13 +1,23 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MdPlayArrow, MdPause } from "react-icons/md";
 
-export default function AudioResponse() {
+interface AudioResponseProps {
+    audioSrc?: string;
+}
+
+export default function AudioResponse({ audioSrc }: AudioResponseProps) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        if (audioSrc && audioRef.current) {
+            audioRef.current.src = audioSrc;
+        }
+    }, [audioSrc]);
 
     const handlePlayPause = () => {
         if (!audioRef.current) return;
