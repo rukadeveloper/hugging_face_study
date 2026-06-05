@@ -5,7 +5,7 @@ import PutColumn from "@/components/PutColumn";
 
 
 export default function EmotionPage() {
-    const putArray = [
+    const putArray: Array<{ ele: 'input' | 'output'; label: string }> = [
         {
             ele: 'input',
             label: 'text'
