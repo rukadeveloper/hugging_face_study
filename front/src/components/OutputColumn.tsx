@@ -1,59 +1,51 @@
 "use client";
 
-interface OutputColumnProps {
-  results: any;
+import { useState } from "@/app/multi_emotion/page";
+
+interface Output {
+    text: string;
+    label: string;
+    score: number;
 }
 
-export default function OutputColumn({ results }: OutputColumnProps) {
-  if (!results?.results) return null;
+interface OutputColumnProps {
+    outputs?: Output[];
+}
 
-  return (
-    <div className="w-full">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">
-        Sentiment Results ({results.total})
-      </h3>
-      <div className="max-h-96 overflow-y-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 px-4 py-2 text-left">
-                Text
-              </th>
-              <th className="border border-gray-300 px-4 py-2 text-left">
-                Sentiment
-              </th>
-              <th className="border border-gray-300 px-4 py-2 text-left">
-                Score
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.results.map((item: any, index: number) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 px-4 py-2 break-words">
-                  {item[0]}
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      item[1].label === "POSITIVE"
-                        ? "bg-green-100 text-green-800"
-                        : item[1].label === "NEGATIVE"
-                        ? "bg-red-100 text-red-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
-                  >
-                    {item[1].label}
-                  </span>
-                </td>
-                <td className="border border-gray-300 px-4 py-2">
-                  {(item[1].score * 100).toFixed(1)}%
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
+export default function OutputColumn({ outputs = [] }: OutputColumnProps) {
+    return (
+        <div className="new__output w-full">
+            <div id="outputArea" className="w-full border border-[#e7e7e9] rounded-[5px] overflow-auto flex flex-col">
+                <div id="outputAreaTitle" className="w-[80px] h-[30px] border-r border-b border-[#e7e7e9] flex justify-center items-center gap-[6px]">
+                    <span className="text-[12px]">Output</span>
+                </div>
+                {outputs && outputs.length > 0 ? (
+                    <div id="output" className="flex flex-col pb-[50px] pt-[20px] px-[20px]">
+                        <table className="border border-[#e7e7e7]">
+                            <thead>
+                                <tr>
+                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">문장</td>
+                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">감정</td>
+                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">확률</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {outputs.map((output: Output, index: number) => (
+                                    <tr key={index}>
+                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{output.text}</td>
+                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{output.label}</td>
+                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{(output.score * 100).toFixed(1)}%</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <div id="output" className="flex flex-col pb-[50px] pt-[20px]">
+                        <h2 className="text-[19px] text-center mb-[20px]">No output</h2>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }

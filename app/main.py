@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1.endpoints import sentiment, fileUpload, soundAssistant
+from app.api.v1.endpoints import sentiment, fileUpload, soundAssistant, emotion
 from pathlib import Path
 
 app = FastAPI()
@@ -19,6 +19,7 @@ app.add_middleware(
 app.include_router(sentiment.router, prefix="/api/v1", tags=["sentiment"])
 app.include_router(fileUpload.router, prefix="/api/v1", tags=["file"])
 app.include_router(soundAssistant.router, prefix="/api/v1", tags=["sound"])
+app.include_router(emotion.router, prefix="/api/v1", tags=["emotion"])
 
 # Create answer directory if it doesn't exist
 answer_dir = Path(__file__).parent.parent / "answer"
