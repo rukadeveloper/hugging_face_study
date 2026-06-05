@@ -26,16 +26,14 @@ export default function EmotionVisualPage() {
         try {
             setIsSubmitting(true);
             const response = await fetch(
-                `http://localhost:8000/api/v1/sentiment-analysis?input_text=${inputValue}`,
+                `http://localhost:8000/api/v1/sentiment-analysis?text=${inputValue}`,
                 {
                     method: "POST",
                 }
             );
             const json = await response.json();
             setOutputValue(
-                `모델: ${json.model_lang}|감정: ${json.result[0].label}|확률: ${(
-                    json.result[0].score * 100
-                ).toFixed(1)}%`
+                `감정: ${json.label}|확률: ${(json.score * 100).toFixed(1)}%`
             );
         } catch (error) {
             console.log(error);

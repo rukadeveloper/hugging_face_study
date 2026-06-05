@@ -27,12 +27,12 @@ export default function MultiEmotionPage() {
     const inputSubmit = async () => {
         try {
             setIsSubmitting(true);
-            const response = await fetch(`http://localhost:8000/api/v1/multi-sentiment?input_text=${inputValue}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/multi-sentiment?texts=${encodeURIComponent(inputValue)}`, {
                 method: "POST"
             })
             const json = await response.json()
             console.log(json)
-            setOutputValue(json)
+            setOutputValue(json.results)
         } catch (error) {
             console.log(error)
         } finally {
