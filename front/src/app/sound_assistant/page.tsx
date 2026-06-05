@@ -50,7 +50,7 @@ export default function SoundAssistantPage() {
                 <h2 className="mt-[30px] mb-[20px]">AI 음성 비서</h2>
                 <div id="gra__block" className="grid grid-cols-2 gap-[10px]">
                     <AudioComponent changeAudioToText={changeAudioToText} changeTransforming={changeTransforming} isTransforming={isTransforming} />
-                    <CommonPut put={"output"} label={"텍스트 변환"} height={110} highHeight={150} value={audioToTextValue} isTransforming={isTransforming} />
+                    <CommonPut put={"output"} label={"텍스트 변환"} height={110} highHeight={150} hasButton={"텍스트 변환"} value={audioToTextValue} isTransforming={isTransforming} />
                     <CommonPut put={"input"} label={"question"} height={40} hasButton={"질문하기"} value={questionValue} changeValue={changeQuestionValue} onSubmit={quest} />
                     <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} />
                 </div>
