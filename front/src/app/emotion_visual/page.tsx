@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import PutColumn from "@/components/PutColumn";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 export interface Output {
     text: string;
@@ -14,7 +14,7 @@ export default function EmotionVisualPage() {
     const [inputValue, setInputValue] = useState<string>("");
     const [outputValue, setOutputValue] = useState<string>("");
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const [chartData, setChartData] = useState<{ label: string; score: number }[]>([]);
+    const [chartData, setChartData] = useState<{ name: string; value: number }[]>([]);
 
     const inputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputValue(e.target.value);
@@ -37,7 +37,15 @@ export default function EmotionVisualPage() {
             setOutputValue(
                 `감정: ${json.label}\n확률: ${(json.score * 100).toFixed(1)}%`
             );
-            setChartData([{ label: json.label, score: json.score }]);
+
+            // 긍정/부정 확률 계산
+            const positiveScore = json.label === "POSITIVE" ? json.score : 1 - json.score;
+            const negativeScore = 1 - positiveScore;
+
+            setChartData([
+                { name: "긍정", value: parseFloat((positiveScore * 100).toFixed(1)) },
+                { name: "부정", value: parseFloat((negativeScore * 100).toFixed(1)) }
+            ]);
         } catch (error) {
             console.log(error);
         } finally {
@@ -79,14 +87,23 @@ export default function EmotionVisualPage() {
                     <div className="mt-[30px] w-full">
                         <h3 className="text-[16px] font-semibold mb-[15px]">감정 분석 결과</h3>
                         <ResponsiveContainer width="100%" height={300}>
-                            <BarChart data={chartData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="label" />
-                                <YAxis />
-                                <Tooltip />
+                            <PieChart>
+                                <Pie
+                                    data={chartData}
+                                    cx="50%"
+                                    cy="50%"
+                                    labelLine={false}
+                                    label={({ name, value }) => `${name}: ${value}%`}
+                                    outerRadius={80}
+                                    fill="#8884d8"
+                                    dataKey="value"
+                                >
+                                    <Cell fill="#82ca9d" />
+                                    <Cell fill="#ffc658" />
+                                </Pie>
+                                <Tooltip formatter={(value) => `${value}%`} />
                                 <Legend />
-                                <Bar dataKey="score" fill="#8884d8" name="확률" />
-                            </BarChart>
+                            </PieChart>
                         </ResponsiveContainer>
                     </div>
                 )}
