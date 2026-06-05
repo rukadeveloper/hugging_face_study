@@ -45,7 +45,7 @@ export default function CommonPut({
             </div>
             {isInput && hasButton && (
                 <button
-                    onClick={onSubmit}
+                    onClick={onSubmit || (() => {})}
                     className="w-full font-[600] py-[10px] bg-[#e4e4e6] rounded-[5px] cursor-pointer mt-[30px] hover:bg-[#d4d4d6]"
                 >
                     {hasButton}
@@ -53,7 +53,7 @@ export default function CommonPut({
             )}
             {!isInput && hasButton && (
                 <button
-                    onClick={onSubmit}
+                    onClick={onSubmit || (() => {})}
                     className="w-full font-[600] py-[10px] bg-[#e4e4e6] rounded-[5px] cursor-pointer mt-[30px] hover:bg-[#d4d4d6]"
                 >
                     {hasButton}
