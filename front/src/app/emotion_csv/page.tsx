@@ -48,11 +48,9 @@ export default function EmotionCsvPage() {
 
             // Analyze CSV
             const analysisResponse = await fetch(
-                "http://localhost:8000/api/v1/csv_chart",
+                `http://localhost:8000/api/v1/csv_chart?file_path=${fileName}`,
                 {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ file_path: fileName }),
                 }
             );
 
