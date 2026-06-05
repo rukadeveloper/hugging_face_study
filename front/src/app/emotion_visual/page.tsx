@@ -68,7 +68,7 @@ export default function EmotionVisualPage() {
                         ele="output"
                         label="greeting"
                         value={outputValue}
-                        onChange={outputChange}
+                        onChange={(e) => outputChange((e as any).target?.value || '')}
                         isSubmitting={isSubmitting}
                     />
                 </div>

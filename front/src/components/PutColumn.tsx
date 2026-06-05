@@ -4,7 +4,7 @@ interface PutColumnProps {
     ele: 'input' | 'output';
     label: string;
     value: string | any;
-    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange?: ((e: React.ChangeEvent<HTMLTextAreaElement>) => void) | ((data: string) => void);
     onSubmit?: () => void;
     onClear?: () => void;
     isSubmitting: boolean;

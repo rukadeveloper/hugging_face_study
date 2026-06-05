@@ -63,7 +63,7 @@ export default function EmotionPage() {
                             ele={e.ele}
                             label={e.label}
                             value={e.ele === 'input' ? inputValue : outputValue}
-                            onChange={e.ele === 'input' ? inputChange : outputChange}
+                            onChange={e.ele === 'input' ? inputChange : (e) => outputChange((e as any).target?.value || '')}
                             onSubmit={e.ele === 'input' ? handleSubmit : undefined}
                             onClear={e.ele === 'input' ? handleClear : undefined}
                             isSubmitting={isSubmitting}
