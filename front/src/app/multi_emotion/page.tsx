@@ -32,7 +32,15 @@ export default function MultiEmotionPage() {
             })
             const json = await response.json()
             console.log(json)
-            setOutputValue(json.results)
+            // Backend returns results as array of tuples: [[text, {text, label, score}], ...]
+            // Extract the second element (object) from each tuple
+            const parsedResults = json.results.map((item: any) => {
+                if (Array.isArray(item) && item.length === 2) {
+                    return item[1]; // Get the object part of the tuple
+                }
+                return item; // Fallback if not a tuple
+            })
+            setOutputValue(parsedResults)
         } catch (error) {
             console.log(error)
         } finally {

@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "@/app/multi_emotion/page";
-
 interface Output {
     text: string;
     label: string;
