@@ -45,10 +45,11 @@ export default function AudioComponent({
             // 자동으로 audio to text 실행
             changeTransforming(true);
             try {
+                const formData = new FormData();
+                formData.append("input_audio_path", data.url);
                 const textResponse = await fetch("http://localhost:8000/api/v1/audio_to_text", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ input_audio_path: data.url }),
+                    body: formData,
                 });
                 const textData = await textResponse.json();
                 changeAudioToText(textData.text);
@@ -88,10 +89,11 @@ export default function AudioComponent({
                     // 자동으로 audio to text 실행
                     changeTransforming(true);
                     try {
+                        const formData = new FormData();
+                        formData.append("input_audio_path", data.url);
                         const textResponse = await fetch("http://localhost:8000/api/v1/audio_to_text", {
                             method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ input_audio_path: data.url }),
+                            body: formData,
                         });
                         const textData = await textResponse.json();
                         changeAudioToText(textData.text);
