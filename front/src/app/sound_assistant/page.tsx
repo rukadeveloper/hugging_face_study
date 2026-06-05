@@ -29,8 +29,11 @@ export default function SoundAssistantPage() {
 
     const quest = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/text_generation?question=${questionValue}`, {
-                method: "POST"
+            const formData = new FormData();
+            formData.append("question", questionValue);
+            const response = await fetch("http://localhost:8000/api/v1/text_generation", {
+                method: "POST",
+                body: formData
             })
             const data = await response.json()
             if (data.status === "success") {
