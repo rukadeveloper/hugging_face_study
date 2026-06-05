@@ -27,6 +27,18 @@ export default function SoundAssistantPage() {
         setAnswerValue(data)
     }
 
+    const convertToTTS = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/api/v1/tts", {
+                method: "POST"
+            })
+            const data = await response.json()
+            console.log("TTS response:", data)
+        } catch (error) {
+            console.log("TTS error:", error)
+        }
+    }
+
     const quest = async () => {
         try {
             const response = await fetch(`http://localhost:8000/api/v1/text_generation?question=${encodeURIComponent(questionValue)}`, {
@@ -52,7 +64,7 @@ export default function SoundAssistantPage() {
                     <AudioComponent changeAudioToText={changeAudioToText} changeTransforming={changeTransforming} isTransforming={isTransforming} />
                     <CommonPut put={"output"} label={"텍스트 변환"} height={110} highHeight={150} hasButton={"텍스트 변환"} value={audioToTextValue} isTransforming={isTransforming} />
                     <CommonPut put={"input"} label={"question"} height={40} hasButton={"질문하기"} value={questionValue} changeValue={changeQuestionValue} onSubmit={quest} />
-                    <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} onSubmit={() => {}} />
+                    <CommonPut put={"output"} label={"answer"} height={100} hasButton={"답변 음성 변환"} value={answerValue} onSubmit={convertToTTS} />
                 </div>
                 <div className="mt-[10px]">
                     <AudioResponse />
