@@ -9,7 +9,7 @@ router = APIRouter()
 
 # Load models
 sentiment_pipeline = pipeline(
-    "sentiment-classification",
+    "text-classification",
     model="WhitePeak/bert-base-cased-Korean-sentiment"
 )
 
