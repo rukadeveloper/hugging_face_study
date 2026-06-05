@@ -35,7 +35,7 @@ export default function EmotionPage() {
                 method: "POST",
             })
             const json = await response.json()
-            setOutputValue(`감정: ${json.label}|확률: ${json.score}`)
+            setOutputValue(`감정: ${json.label}\n확률: ${json.score}`)
         } catch (error) {
             console.log(error)
         } finally {

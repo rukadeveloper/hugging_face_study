@@ -33,7 +33,7 @@ export default function EmotionVisualPage() {
             );
             const json = await response.json();
             setOutputValue(
-                `감정: ${json.label}|확률: ${(json.score * 100).toFixed(1)}%`
+                `감정: ${json.label}\n확률: ${(json.score * 100).toFixed(1)}%`
             );
         } catch (error) {
             console.log(error);
