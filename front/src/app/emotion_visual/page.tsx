@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PutColumn from "@/components/PutColumn";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 export interface Output {
     text: string;
@@ -13,6 +14,7 @@ export default function EmotionVisualPage() {
     const [inputValue, setInputValue] = useState<string>("");
     const [outputValue, setOutputValue] = useState<string>("");
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [chartData, setChartData] = useState<{ label: string; score: number }[]>([]);
 
     const inputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputValue(e.target.value);
@@ -35,6 +37,7 @@ export default function EmotionVisualPage() {
             setOutputValue(
                 `감정: ${json.label}\n확률: ${(json.score * 100).toFixed(1)}%`
             );
+            setChartData([{ label: json.label, score: json.score }]);
         } catch (error) {
             console.log(error);
         } finally {
@@ -45,6 +48,7 @@ export default function EmotionVisualPage() {
     const handleClear = () => {
         setInputValue("");
         setOutputValue("");
+        setChartData([]);
     };
 
     return (
@@ -71,6 +75,21 @@ export default function EmotionVisualPage() {
                         isSubmitting={isSubmitting}
                     />
                 </div>
+                {chartData.length > 0 && (
+                    <div className="mt-[30px] w-full">
+                        <h3 className="text-[16px] font-semibold mb-[15px]">감정 분석 결과</h3>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <BarChart data={chartData}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="label" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="score" fill="#8884d8" name="확률" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                )}
             </div>
         </main>
     );
