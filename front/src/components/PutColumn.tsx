@@ -4,7 +4,7 @@ interface PutColumnProps {
     ele: 'input' | 'output';
     label: string;
     value: string | any;
-    onChange?: ((e: React.ChangeEvent<HTMLTextAreaElement>) => void) | ((data: string) => void);
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     onSubmit?: () => void;
     onClear?: () => void;
     isSubmitting: boolean;
@@ -19,6 +19,12 @@ export default function PutColumn({
     onClear,
     isSubmitting,
 }: PutColumnProps) {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (onChange) {
+            onChange(e);
+        }
+    };
+
     return (
         <div className="new__input w-full">
             <div id="inputArea" className="w-full border border-[#e7e7e9] rounded-[5px] overflow-auto flex flex-col">
@@ -30,7 +36,7 @@ export default function PutColumn({
                     className="w-full flex-1 p-[20px] border-none outline-none resize-none"
                     placeholder={`Enter ${label}...`}
                     value={typeof value === 'string' ? value : ''}
-                    onChange={onChange}
+                    onChange={handleChange}
                     disabled={ele === 'output'}
                 />
             </div>
