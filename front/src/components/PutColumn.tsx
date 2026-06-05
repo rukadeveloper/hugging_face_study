@@ -27,7 +27,7 @@ export default function PutColumn({
                 </div>
                 <textarea
                     id={ele}
-                    className="w-full flex-1 p-[20px] border-none outline-none resize-none"
+                    className="w-full flex-1 p-[20px] border-none outline-none resize-none focus:outline-none"
                     placeholder={`Enter ${label}...`}
                     value={typeof value === 'string' ? value : ''}
                     onChange={onChange}
@@ -35,17 +35,17 @@ export default function PutColumn({
                 />
             </div>
             {ele === 'input' && (
-                <div className="flex gap-[10px] mt-[10px]">
+                <div className="flex gap-[10px] mt-[30px]">
                     <button
                         onClick={onSubmit}
                         disabled={isSubmitting}
-                        className="flex-1 bg-blue-600 text-white py-[10px] rounded-[5px] font-semibold hover:bg-blue-700 disabled:bg-gray-400"
+                        className="flex-1 font-[600] py-[10px] bg-[#f0f0f1] rounded-[5px] cursor-pointer hover:bg-[#e0e0e2] disabled:bg-gray-400"
                     >
                         {isSubmitting ? 'Processing...' : 'Submit'}
                     </button>
                     <button
                         onClick={onClear}
-                        className="flex-1 bg-gray-300 text-gray-700 py-[10px] rounded-[5px] font-semibold hover:bg-gray-400"
+                        className="flex-1 font-[600] py-[10px] bg-[#e4e4e6] rounded-[5px] cursor-pointer hover:bg-[#d4d4d6]"
                     >
                         Clear
                     </button>

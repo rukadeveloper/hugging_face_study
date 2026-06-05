@@ -1,18 +1,21 @@
 "use client";
 
-import { useState } from "@/app/multi_emotion/page";
-
-interface Output {
+export interface Outputs {
     text: string;
     label: string;
     score: number;
 }
 
-interface OutputColumnProps {
-    outputs?: Output[];
+interface Output {
+    [key: string]: any;
 }
 
-export default function OutputColumn({ outputs = [] }: OutputColumnProps) {
+interface OutputColumnProps {
+    outputs?: Outputs[];
+    output?: Output;
+}
+
+export default function OutputColumn({ outputs, output }: OutputColumnProps) {
     return (
         <div className="new__output w-full">
             <div id="outputArea" className="w-full border border-[#e7e7e9] rounded-[5px] overflow-auto flex flex-col">
@@ -24,28 +27,31 @@ export default function OutputColumn({ outputs = [] }: OutputColumnProps) {
                         <table className="border border-[#e7e7e7]">
                             <thead>
                                 <tr>
-                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">문장</td>
-                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">감정</td>
-                                    <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">확률</td>
+                                    <td className="pl-[10px]">문장</td>
+                                    <td className="pl-[10px]">감정</td>
+                                    <td className="pl-[10px]">확률</td>
                                 </tr>
                             </thead>
                             <tbody>
-                                {outputs.map((output: Output, index: number) => (
+                                {outputs.map((output: Outputs, index: number) => (
                                     <tr key={index}>
-                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{output.text}</td>
-                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{output.label}</td>
-                                        <td className="pl-[10px] border border-[#e7e7e9] py-[10px]">{(output.score * 100).toFixed(1)}%</td>
+                                        <td className="pl-[10px]">{output.text}</td>
+                                        <td className="pl-[10px]">{output.label}</td>
+                                        <td className="pl-[10px]">{output.score}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
                 ) : (
-                    <div id="output" className="flex flex-col pb-[50px] pt-[20px]">
+                    <div id="output" className="flex flex-col pb-[50px]">
                         <h2 className="text-[19px] text-center mb-[20px]">No output</h2>
                     </div>
                 )}
             </div>
+            <button className="w-full font-[600] py-[10px] bg-[#e4e4e6] rounded-[5px] cursor-pointer mt-[30px]">
+                Flag
+            </button>
         </div>
     );
 }
