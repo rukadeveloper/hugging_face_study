@@ -46,6 +46,7 @@ ENV/
 node_modules/
 .next/
 out/
+front/node_modules/
 front/.next/
 front/out/
 front/dist/
